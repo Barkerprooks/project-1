@@ -123,7 +123,7 @@ vector<string> task3(Graph g) {
   
   cout << "[Task 3] running..." << endl;
   
-  routeA = BFSall(g, s);
+  routeA = DFSall(g, s);
   routeB = BFSdst(g, routeA[routeA.size() - 1], s);
 
   routeA.pop_back();

@@ -7,8 +7,9 @@
 #include "graph.hpp"
 #include <vector>
 
-vector<string> unwrap(map<string, string>, string, string);
 vector<string> BFSdst(Graph, string, string);
 vector<string> BFSall(Graph, string);
+void DFSvisit(Graph, string, set<string> &, vector<string> &);
+vector<string> DFSall(Graph, string);
 
 #endif
