@@ -25,19 +25,13 @@ int main(int argc, char **argv) {
   Graph cities(file);
 
   vector<string> route;
-  set<string> accepted;
+  string input;
 
-  string input, a, b, c;
-  unsigned int x;
-  
   while(true) {
    
-    accepted = cities.getNodesWithEdges();
-
     cout << "1) x connections from a to b" << endl;
     cout << "2) from a to d through b and c" << endl;
     cout << "3) around the world and back" << endl;
-    cout << "4) middle ground" << endl;
     cout << "l) list all nodes" << endl;
     cout << "i) list all inner nodes (nodes with outbound connections)" << endl;
     cout << "q) quit" << endl;
@@ -50,59 +44,31 @@ int main(int argc, char **argv) {
     if(input == "l") {
       for(string city : cities.getNodes())
         cout << city << endl;
-    } else if(input == "li") {
+    } else if(input == "i") {
       for(string city : cities.getNodesWithEdges())
         cout << city << endl; 
     }
 
-    // 1 ) city a to city b with less than x connections
-    if(input == "1") {
-          
-      while(!validInput("[Task 1] Enter city A (inner node)", a, accepted))
-        cout << "not a valid city" << endl;
-      
-      accepted = cities.getNodes(); // valid choices are now all nodes
-      accepted.erase(a);
-      
-      while(!validInput("[Task 1] Enter city B (not city A)", b, accepted)) {
-        if(a == b)
-          cout << "You are already here" << endl;
-        else
-          cout << "not a valid city" << endl;
-      }
-
-      while(!valueInput("[Task 1] Enter desired # of connections", x))
-        cout << "not a valid number" << endl;
-
-      route = task1(cities, a, b, x);
-
-    } else if(input == "2") {
-      // thai
-    } else if(input == "3") {
-      
-      while(!validInput("[Task 3] Enter starting city", a, accepted))
-        cout << "not a valid starting node" << endl;
-
-      route = task3(cities, a);
-    
-    } else if(input == "4")
-      cout << "not ready yet :S" << endl;
-
-    showFlights(route);
+    if(input == "1")
+      showFlights(task1(cities));
+    else if(input == "2")
+      showFlights(task2(cities));
+    else if(input == "3")
+      showFlights(task3(cities));
   }
-
 
   return 0;
 }
 
 void showFlights(vector<string> route) {
   if(route.empty()) {
-    cout << "No path exists" << endl;
-  } else {
-    cout << "flights taken: " << route.size() - 1 << endl;
-    cout << route[0]; // display path
-    for(size_t i = 1; i < route.size(); i++)
-      cout << " <-(" << route.size() - i << ")- " << route[i];
-    cout << endl;
+    cout << "no path available" << endl;
+    return;
   }
+
+  cout << "[Result] connecting flights: " << route.size() - 1 << endl;
+  cout << route[0];
+  for(size_t i = 1; i < route.size(); i++)
+    cout << " -> " << route[i];
+  cout << endl;
 }

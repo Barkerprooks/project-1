@@ -5,10 +5,10 @@
 // in this project
 
 #include "graph.hpp"
+#include <vector>
 
-typedef pair<string, unsigned int> NodeWeight;
-typedef pair<map<string, string>, unsigned int> GraphPath;
-
-GraphPath BFS(Graph, string, string);
+vector<string> unwrap(map<string, string>, string, string);
+vector<string> BFSdst(Graph, string, string);
+vector<string> BFSall(Graph, string);
 
 #endif
