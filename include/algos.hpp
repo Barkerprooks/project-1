@@ -8,7 +8,8 @@
 #include <vector>
 
 vector<string> BFSdst(Graph, string, string);
-vector<string> BFSall(Graph, string);
+vector<string> BFSthru(Graph, string, string, string, string);
+
 void DFSvisit(Graph, string, set<string> &, vector<string> &);
 vector<string> DFSall(Graph, string);
 

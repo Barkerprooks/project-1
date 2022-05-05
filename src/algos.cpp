@@ -33,14 +33,14 @@ vector<string> BFSdst(Graph g, string src, string dst) {
   return {};
 }
 
-vector<string> BFSall(Graph g, string src) {
-
+vector<string> BFSthru(Graph g, string a, string b, string c, string d) {
+  
   queue<pair<string, vector<string>>> nodes; // node queue
   set<string> visited;// set of visited nodes
   vector<string> nodePath;
   string node;
 
-  nodes.push({src, {src}});
+  nodes.push({a, {a}});
 
   while(!nodes.empty()) {
     
@@ -48,16 +48,20 @@ vector<string> BFSall(Graph g, string src) {
     nodePath = nodes.front().second;
     nodes.pop();
     
-    if(nodePath.size() == g.getNodes().size())
+    if(node == d && visited.count(b) && visited.count(c))
       return nodePath;
-
+ 
     for(string connection : g.getNodes(node)) {
-      nodePath.push_back(connection);
-      nodes.push({connection, nodePath});
+      if(visited.count(connection) == 0) {
+        visited.insert(connection);
+        nodePath.push_back(connection);
+        nodes.push({connection, nodePath});
+      }
     }
   }
 
   return {};
+
 }
 
 void DFSvisit(Graph g, string src, set<string> &visited, vector<string> &path) {

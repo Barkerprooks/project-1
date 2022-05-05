@@ -56,7 +56,7 @@ vector<string> task1(Graph g) {
 
 vector<string> task2(Graph g) {
   
-  vector<string> route, routeA, routeB, routeC;
+  vector<string> route;
   set<string> valid;
   string a, b, c, d;
 
@@ -94,19 +94,8 @@ vector<string> task2(Graph g) {
     else
       cout << "not a valid city" << endl;
   }
- 
-  routeA = BFSdst(g, a, b);
-  routeB = BFSdst(g, b, c);
-  routeC = BFSdst(g, c, d);
 
-  routeA.pop_back();
-  routeB.pop_back();
-
-  route.insert(route.end(), routeA.begin(), routeA.end());
-  route.insert(route.end(), routeB.begin(), routeB.end());
-  route.insert(route.end(), routeC.begin(), routeC.end());
-
-  return route;
+  return BFSthru(g, a, b, c, d);
 }
 
 
